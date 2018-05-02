@@ -1,0 +1,60 @@
+@model IEnumerable<Celestial.Models.Stat>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.capital)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.crystal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.pop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.stability)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Planet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.capital)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.crystal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Planet.PlanetId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StatId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StatId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StatId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

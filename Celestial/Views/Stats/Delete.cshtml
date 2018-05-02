@@ -1,0 +1,54 @@
+@model Celestial.Models.Stat
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Stat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="StatId" />
+        <dt>
+            @Html.DisplayNameFor(model => model.capital)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.capital)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.crystal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.crystal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.pop)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.pop)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.stability)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stability)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Planet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planet.PlanetId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>

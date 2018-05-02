@@ -1,0 +1,65 @@
+@model Celestial.Models.Stat
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Stat</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="StatId" />
+        <div class="form-group">
+            <label asp-for="capital" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="capital" class="form-control" />
+                <span asp-validation-for="capital" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="crystal" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="crystal" class="form-control" />
+                <span asp-validation-for="crystal" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="pop" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="pop" class="form-control" />
+                <span asp-validation-for="pop" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="stability" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="stability" class="form-control" />
+                <span asp-validation-for="stability" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PlanetId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="PlanetId" class="form-control" asp-items="ViewBag.PlanetId"></select>
+                <span asp-validation-for="PlanetId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

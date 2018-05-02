@@ -35,3 +35,12 @@ textarea {
         display: none;
     }
 }
+
+.planet-div {
+    height: 400px;
+    width: 400px;
+}
+
+.logout-button {
+    margin-top: 10px;
+}

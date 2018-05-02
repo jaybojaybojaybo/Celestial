@@ -1,0 +1,76 @@
+@using Celestial.Models
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Celestial.Models.Stat
+
+<h2>Details</h2>
+
+<div>
+    <h4>Planet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Planet.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planet.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Planet.Government)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planet.Government)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Planet.Economy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planet.Economy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Planet.Geography)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planet.Geography)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Stats</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.HiddenFor(model => model.StatId)
+            @Html.DisplayNameFor(model => model.Capital)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Capital)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Crystal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Crystal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pop)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pop)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stability)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stability)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PlanetId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

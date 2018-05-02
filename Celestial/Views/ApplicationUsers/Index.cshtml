@@ -1,0 +1,26 @@
+@model IEnumerable<Celestial.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Security.Claims
+
+<h2>Authentication with Identity</h2>
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Hello @User.Identity.Name!</p>
+    @using (Html.BeginForm("LogOff", "ApplicationUsers"))
+    {
+        <input type="submit" class="btn btn-default" value="Log out" />
+    }
+    <p>@Html.ActionLink("Planets", "Index", "Planets")</p>
+    <p>@Html.ActionLink("Stats", "Index", "Stats")</p>
+}
+else
+{
+    <p>@Html.ActionLink("Register", "Register")</p>
+    <p>@Html.ActionLink("Log in", "Login")</p>
+}
