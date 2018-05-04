@@ -7,6 +7,24 @@
 
 @model Celestial.Models.Stat
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.natural-disaster').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("NaturalDisaster", "Stats", new { id = Model.StatId })',
+                data: $(this).serialize(),
+                success: function (result) {
+                    console.log(result.Capital);
+                    $('#capital').text(result.Capital);
+                    $('#crystal').text(result.Crystal);
+                    $('#pop').text(result.Pop);
+                }
+            });
+        });
+    });
+</script>
+
 <h2>Details</h2>
 
 <div>
@@ -48,28 +66,29 @@
             @Html.DisplayNameFor(model => model.Capital)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Capital)
+            <span id="capital">@Model.Capital</span>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Crystal)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Crystal)
+            <span id="crystal">@Model.Crystal</span>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Pop)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Pop)
+            <span id="pop">@Model.Pop</span>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Stability)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Stability)
+            <span id="stability">@Html.DisplayFor(model => model.Stability)</span>
         </dd>
     </dl>
 </div>
+<button class="natural-disaster">Natural Disaster</button>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.PlanetId">Edit</a> |
     <a asp-action="Index">Back to List</a>

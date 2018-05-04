@@ -155,5 +155,26 @@ namespace Celestial.Controllers
         {
             return _context.Stat.Any(e => e.StatId == id);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetStats(int id)
+        {
+            var stat = await _context.Stat.Include(s => s.Planet).FirstOrDefaultAsync(m => m.StatId == id);
+            return RedirectToAction("Details");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NaturalDisaster(int id)
+        {
+            var stat = await _context.Stat
+                .Include(p => p.Planet)
+                .SingleOrDefaultAsync(m => m.StatId == id);
+            stat.Capital -= 50;
+            stat.Crystal -= 50;
+            stat.Pop -= 50;
+            _context.Stat.Update(stat);
+            await _context.SaveChangesAsync();
+            return Json(stat);
+        }
     }
 }

@@ -15,6 +15,10 @@ namespace Celestial.Models
 
         }
 
+        public ApplicationDbContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseMySql(@"Server=localhost;Port=8889;database=celestial;uid=root;pwd=root;");
@@ -28,6 +32,6 @@ namespace Celestial.Models
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Planet> Planet { get; set; }
         public DbSet<Stat> Stat { get; set; }
-
+        public DbSet<Destination> Destinations { get; set; }
     }
 }

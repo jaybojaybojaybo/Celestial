@@ -10,76 +10,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<body>
+    <h2>Index</h2>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Government)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Economy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Geography)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatId)
+                </th>
+                <th>
+                    Planet:
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.PlanetId)
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Government)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Economy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Geography)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PlanetId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.PlanetId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PlanetId">Delete</a>
+                    </td>
+                    <td>
+                        <div class="planet-div">
+                            <a asp-controller="Planets" asp-action="Details" asp-route-id="@item.PlanetId">
+                                <a-scene embedded>
+                                    <a-sphere src="/images/goku.png"
+                                              position="0 1.25 -5"
+                                              radius="1.25"
+                                              rotation="0 .35 0">
+                                        <a-animation attribute="rotation" from="0 0 0" to="0 360 0" easing="linear" dur="1000" repeat="indefinite"></a-animation>
+                                        <a-sky color="#000000"></a-sky>
+                                </a-scene>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Government)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Economy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Geography)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatId)
-            </th>
-            <th>
-                Planet:
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.HiddenFor(modelItem => item.PlanetId)
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Government)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Economy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Geography)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PlanetId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PlanetId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PlanetId">Delete</a>
-            </td>
-            <td>
-                <div class="planet-div">
-                    <a asp-controller="Planets" asp-action="Details" asp-route-id="@item.PlanetId">                 
-                        <a-scene embedded>
-                            <a-sphere src="/images/goku.png"
-                                      position="0 1.25 -5"
-                                      radius="1.25"
-                                      rotation="0 .35 0">
-                                <a-animation attribute="rotation" from="0 0 0" to="0 360 0" easing="linear" dur="1000" repeat="indefinite"></a-animation>
-                                <a-sky color="#000000"></a-sky>
-                        </a-scene>
-                    </a>
-                </div>
-            </td>            
-        </tr>
-        
-}
-    </tbody>    
-</table>
+            }
+        </tbody>
+    </table>
+</body>

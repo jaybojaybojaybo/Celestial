@@ -2,107 +2,112 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.hello-ajax').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("HelloAjax")',
+                success: function (result) {
+                    $('#result1').html(result);
+                }
+            });
+        });
+        $('.sum').click(function () {
+            $.ajax({
+                type: 'GET',
+                data: { firstNumber: 1, secondNumber: 2 },
+                url: '@Url.Action("Sum")',
+                success: function (result) {
+                    $('#result2').html(result);
+                }
+            });
+        });
+        $('.display-object').click(function () {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '@Url.Action("DisplayObject")',
+                success: function (result) {
+                    var resultString = 'Id: ' + result.id + '<br>City: ' + result.city + '<br>Country: ' + result.country;
+            $('#result3').html(resultString);
+                }
+            });
+        });
+        $('.display-view').click(function () {
+            $.ajax({
+                type: 'GET',
+                dataType: 'html',
+                url: '@Url.Action("DisplayViewWithAjax")',
+                success: function (result) {
+                    $('#result4').html(result);
+                }
+            });
+        });
+        $('.display-random-database-items').submit(function (event) {
+    event.preventDefault();
+            $.ajax({
+                url: '@Url.Action("RandomDestinationList")',
+                type: 'GET',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (result) {
+                    var stringResult = '<ul>';
+                    for (var i = 0; i < result.length; i++) {
+                        stringResult += '<li>' + result[i].city + ', ' + result[i].country + '</li>';
+                    }
+                    stringResult += '</ul>';
+                $('#result5').html(stringResult);
+                }
+            });
+        });
+        $('.new-destination').submit(function (event) {
+    event.preventDefault();
+            $.ajax({
+                url: '@Url.Action("NewDestination")',
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function (result) {
+                    var resultMessage = 'You\'ve added a new destination to the database!<br>Id: ' + result.id + '<br>City: ' + result.city + '<br>Country: ' + result.country;
+                    $('#result6').html(resultMessage);
+                }
+            });
+        });
+    });
+</script>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518004">Bower</a> for managing client-side libraries</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699318">Add client packages using Bower.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
+<h2>Basic AJAX</h2>
+<h4 class="hello-ajax">Hello AJAX</h4>
+<div id="result1"></div>
+
+<h2>Using Parameters</h2>
+<h4 class="sum">Sum</h4>
+<div id="result2"></div>
+
+<h2>Using JSON to display an object</h2>
+<h4 class="display-object">Display object</h4>
+<div id="result3"></div>
+
+<h2>Displaying a view</h2>
+<h4 class="display-view">Display view</h4>
+<div id="result4"></div>
+
+<h2>Using a form to make a GET request</h2>
+<form action="RandomDestinationList" class="display-random-database-items">
+    <label for="destinationCount">How many destinations would you like to see?</label>
+    <input type="number" name="destinationCount" />
+    <button type="submit">Submit</button>
+</form>
+<div id="result5"></div>
+
+<h2>Submitting data with a POST request</h2>
+<form action="NewDestination" class="new-destination">
+    <label for="newCity">City: </label>
+    <input type="text" name="newCity" />
+    <label for="newCountry">Country: </label>
+    <input type="text" name="newCountry" />
+    <button type="submit">Submit</button>
+</form>
+<div id="result6"></div>
